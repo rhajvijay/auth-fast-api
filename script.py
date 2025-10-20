@@ -1,15 +1,24 @@
-# This is a sample Python script.
+import os
+import shutil
 
-# Press ⌃F5 to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+def declutter(path):
+    extension_map = {
+        'Images' : ('jpg','jpeg','heic','png',),
+        'Videos' : ('mp4',),
+        'Audio' : ('aac','mp3',),
+        'Compressed' : ('zip','rar','tar'),
+        'Code' :   ('py','php','html','xml','js','sh','cpp','c'),
+        'Documents' : ('pdf','txt','csv','docx','doc','xls','xlsx'),
+    }  # Press F9 to toggle the breakpoint.
 
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press F9 to toggle the breakpoint.
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    path = input('Enter path: ')
+    if os.path.isabs(path) and os.path.exists(path):
+        files = os.listdir(path)
+        for file in files:
+            if os.path.isfile(os.path.join(path, file)):
+                print(os.path.join(path, file))
+        print('Path exists')
+    else:
+        print('Path doesn\'t exist')
+    declutter(path)
